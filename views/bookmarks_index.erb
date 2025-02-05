@@ -1,101 +1,29 @@
 <!-- views/bookmarks_index.erb -->
-<div class="bg-white rounded-2xl p-8 shadow">
-  <h2 class="text-2xl font-bold">Bookmarks</h2>
+<div id="bookmarks" class="p-8" data-controller="edit">
+  <header class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Bookmarks</h1>
+    <hgroup>
+      
+      <input type="checkbox" switch data-action="edit#toggle" />
+    </hgroup>
+  </header>
   <!-- Bookmarks List -->
-  <ul class="space-y-2">
-    <li class="py-3 flex justify-between items-center border-b border-gray-100">
-      <button
-        id="openCreateDialog"
-        class="text-blue-600"
-      >
-        + Add Bookmark
-      </button>
+  <ul class="space-y-2"  data-edit-target="bookmarks">
+    <li class="py-3 border-b border-gray-100">
+      <button id="openCreateDialog" class="hidden text-blue-600">+ Add Bookmark</button>
     </li>
-    <% @bookmarks.each do |bookmark| %>
-      <li class="py-3 flex justify-between items-center border-b border-gray-100">
-        <div>
-          <strong><%= bookmark.title %></strong><br/>
-          <a href="<%= bookmark.url %>" target="_blank" class="text-gray-400"><%= bookmark.url %></a>
-        </div>
-        <div class="space-x-2">
-          <!-- "Edit" button: pass data via data attributes -->
-          <button
-            class="px-3 py-1"
-            data-bookmark-id="<%= bookmark.id %>"
-            data-bookmark-title="<%= bookmark.title %>"
-            data-bookmark-url="<%= bookmark.url %>"
-            onclick="openEditDialog(this)"
-          >
-            Edit
-          </button>
-
-          <!-- "Delete" form -->
-          <form
-            action="/bookmarks/<%= bookmark.id %>"
-            method="POST"
-            class="inline"
-          >
-            <input type="hidden" name="_method" value="DELETE" />
-            <button
-              type="submit"
-              class="px-3 py-1 text-red-600"
-              onclick="return confirm('Are you sure you want to delete this bookmark?')"
-            >
-              Delete
-            </button>
-          </form>
-        </div>
-      </li>
+    <% @bookmarks.each do |b| %>
+      <%= partial :_bookmark, bookmark: b %>
     <% end %>
   </ul>
   
 
   <!-- CREATE BOOKMARK DIALOG -->
-  <dialog
-    id="createBookmarkDialog"
-    class="p-6 border rounded w-11/12 max-w-md"
-  >
-    <h2 class="text-lg font-semibold mb-4">New Bookmark</h2>
-    <form action="/bookmarks" method="POST" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium" for="newTitle">Title</label>
-        <input
-          type="text"
-          id="newTitle"
-          name="title"
-          required
-          class="w-full p-2 border border-gray-300 rounded"
-        />
-      </div>
-      <div>
-        <label class="block text-sm font-medium" for="newUrl">URL</label>
-        <input
-          type="url"
-          id="newUrl"
-          name="url"
-          required
-          class="w-full p-2 border border-gray-300 rounded"
-        />
-      </div>
-      <div class="flex justify-end space-x-2">
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-          onclick="document.getElementById('createBookmarkDialog').close();"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Save
-        </button>
-      </div>
-    </form>
-  </dialog>
+  <%= partial :_bookmark_add %>
 
   <!-- EDIT BOOKMARK DIALOG -->
+  <%= partial :_bookmark_edit %>
+  
   <dialog
     id="editBookmarkDialog"
     class="p-6 border rounded w-11/12 max-w-md"

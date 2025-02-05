@@ -1,0 +1,47 @@
+<dialog
+  id="editBookmarkDialog"
+  class="mx-auto m-4 p-6 rounded w-1/2 max-w-md backdrop:bg-black/50 backdrop:backdrop-blur-md"
+>
+  <h2 class="text-lg font-semibold mb-4">Edit Bookmark</h2>
+  <!-- We'll set "action" dynamically in JS -->
+  <form id="editBookmarkForm" method="POST" class="space-y-4">
+    <input type="hidden" name="_method" value="PATCH" />
+    
+    <div>
+      <label class="block text-sm font-medium" for="editTitle">Title</label>
+      <input
+        type="text"
+        id="editTitle"
+        name="title"
+        required
+        class="w-full p-2 border border-gray-300 rounded"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium" for="editUrl">URL</label>
+      <input
+        type="url"
+        id="editUrl"
+        name="url"
+        required
+        class="w-full p-2 border border-gray-300 rounded"
+      />
+    </div>
+    <div class="flex justify-end space-x-2">
+      <button
+        type="button"
+        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+        onclick="document.getElementById('editBookmarkDialog').close();"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+  
+</dialog>

@@ -5,10 +5,16 @@
   <title><%= @title || "My Sinatra App" %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style>
+    .edit li button{
+      display: inline-block;
+    }
+  </style>
 </head>
-<body class="p-8 bg-gray-100 min-h-screen">
+<body class="p-8 bg-white min-h-screen">
   <main class="container mx-auto">
     <%= yield %>
   </main>
+  <script src="app/javascript/application.js" type="module"></script>
 </body>
 </html>

@@ -11,10 +11,6 @@ enable :sessions
 enable :method_override
 set :session_secret, SecureRandom.hex(64)
 
-# configure :development do
-#   use Rack::LiveReload
-# end
-
 helpers do
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
@@ -26,6 +22,10 @@ helpers do
 
   def authenticate!
     redirect "/login" unless logged_in?
+  end
+  
+  def partial(template, locals = {})
+    erb(template, { layout: false }, locals)
   end
 end
 

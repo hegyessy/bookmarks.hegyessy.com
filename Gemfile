@@ -10,10 +10,3 @@ gem "sqlite3"
 gem "bcrypt"
 gem "rake"
 gem "ostruct"
-
-group :development do
-  gem "guard"
-  gem "guard-livereload", require: false
-  gem "rack-livereload"
-  gem "fiddle"
-end

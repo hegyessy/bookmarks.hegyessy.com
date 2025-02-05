@@ -1,0 +1,7 @@
+<% if logged_in? %>
+ <%= redirect "/bookmarks" unless logged_in? %>
+<% else %>
+  <p>You are not logged in.</p>
+  <a href="/signup">Sign Up</a> | 
+  <a href="/login">Login</a>
+<% end %>

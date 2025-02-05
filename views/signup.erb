@@ -1,0 +1,13 @@
+<h2>Sign Up</h2>
+<% if @error %>
+  <p style="color:red"><%= @error %></p>
+<% end %>
+<form action="/signup" method="POST">
+  <label>Email:</label>
+  <input type="email" name="email" />
+  <br><br>
+  <label>Password:</label>
+  <input type="password" name="password" />
+  <br><br>
+  <input type="submit" value="Sign Up" />
+</form>
